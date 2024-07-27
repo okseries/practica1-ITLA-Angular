@@ -1,1 +1,64 @@
-<p>ejecicios works!</p>
+<div class=" flex rounded overflow-hidden shadow-lg w-full space-x-2 items-center px-4 py-4 justify-evenly">
+    <app-button text="Mensaje de bienvenida"  (click)="grade.set('MENSAJE')"/>
+    <app-button text="Nombre y Edad"  (click)="grade.set('NOMBRE')"/>
+    <app-button text="Resta y multiplicacion"  (click)="grade.set('RESTA')"/>
+    <app-button text="Area" (click)="grade.set('AREA')"/>
+    <app-button text="Condicional" (click)="grade.set('CONDICIONAL')"/>
+    <app-button text="Fecha" (click)="grade.set('FECHA')"/>
+    
+</div>
+
+<section class="flex  shadow-inner w-full items-center px-4 py-4 ">
+
+  @switch (grade()) {
+   
+    @case ('MENSAJE') {
+      <h3 class="font-bold">Bienvenidos a mi aplicacion de angular!</h3>
+    }
+
+    @case ('NOMBRE') {
+      <div class="flex-col">
+        <h3> <span class="font-bold">Nombre:</span> {{persona.nombre}} </h3>
+        <h3> <span class="font-bold">Edad:</span> {{persona.edad}} </h3>
+      </div>
+      
+    }
+
+    @case ('RESTA') {
+      <div class="flex-col">
+        <h3> <span class="font-bold">La resta de los numeros(12, 20):</span> {{resta(12,20)}} </h3>
+        <h3> <span class="font-bold">La multiplicacion de los numeros(8, 4):</span> {{producto(8,4)}} </h3>
+      </div>     
+    }
+
+    @case ('AREA') {
+      
+      <h3> <span class="font-bold">Dado el radius (5) el area del circulo es: </span> {{areaCirculo()}} </h3>
+     
+    }
+
+    @case ('CONDICIONAL') {
+
+      <h1 [class]="  isLoggedIn? 'text-green-700 font-bold' : 'text-red-700 font-bold '">{{isLoggedIn? 'Bienvenido de nuevo!' : 'Por favor, inicia sesion!'}}</h1>
+
+    }
+
+    @case ('FECHA') {
+      
+      <h3> <span class="font-bold">La fecha actual es: </span> {{fecha()}} </h3>
+
+    }
+
+
+    @default {
+      <p>Por encima de 70</p>
+    }
+
+  }
+
+ 
+  
+</section>
+
+
+
