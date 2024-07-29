@@ -1,64 +1,112 @@
-<div class=" flex rounded overflow-hidden shadow-lg w-full space-x-2 items-center px-4 py-4 justify-evenly">
-    <app-button text="Mensaje de bienvenida"  (click)="grade.set('MENSAJE')"/>
-    <app-button text="Nombre y Edad"  (click)="grade.set('NOMBRE')"/>
-    <app-button text="Resta y multiplicacion"  (click)="grade.set('RESTA')"/>
-    <app-button text="Area" (click)="grade.set('AREA')"/>
-    <app-button text="Condicional" (click)="grade.set('CONDICIONAL')"/>
-    <app-button text="Fecha" (click)="grade.set('FECHA')"/>
-    
+<div class=" flex w-full justify-center">
+  <button
+  (click)="login()"
+  [class]="
+  isLoggedIn
+      ? 'justify-self-end mb-4 rounded text-center px-2 py-2 text-white bg-orange-600  hover:bg-orange-700'
+      : 'justify-self-end mb-4 rounded text-center px-2 py-2 text-white bg-blue-900  hover:bg-blue-950, '
+  "
+>
+  {{ isLoggedIn ? "Cerrar sesion" : "Iniciar sesion" }}
+</button>
 </div>
 
-<section class="flex  shadow-inner w-full items-center px-4 py-4 ">
+@if (isLoggedIn) {
 
-  @switch (grade()) {
-   
-    @case ('MENSAJE') {
-      <h3 class="font-bold">Bienvenidos a mi aplicacion de angular!</h3>
-    }
+<div
+  class="flex rounded overflow-hidden shadow-lg w-full space-x-2 items-center px-4 py-4 justify-evenly"
+>
+  <app-button text="Mensaje de bienvenida" (click)="grade.set('MENSAJE')" />
+  <app-button text="Nombre y Edad" (click)="grade.set('NOMBRE')" />
+  <app-button text="Resta y multiplicacion" (click)="grade.set('RESTA')" />
+  <app-button text="Area" (click)="grade.set('AREA')" />
+  <app-button text="Condicional" (click)="grade.set('CONDICIONAL')" />
+  <app-button text="Fecha" (click)="grade.set('FECHA')" />
+  <app-button text="Ver datos" (click)="grade.set('DATOS')" />
+</div>
 
-    @case ('NOMBRE') {
-      <div class="flex-col">
-        <h3> <span class="font-bold">Nombre:</span> {{persona.nombre}} </h3>
-        <h3> <span class="font-bold">Edad:</span> {{persona.edad}} </h3>
+<section class="flex shadow-inner w-full items-center px-4 py-4">
+  @switch (grade()) { @case ('MENSAJE') {
+  <h3 class="font-bold">Bienvenidos a mi aplicacion de angular!</h3>
+  } @case ('NOMBRE') {
+  <div class="flex-col">
+    <h3><span class="font-bold">Nombre:</span> {{ persona.nombre }}</h3>
+    <h3><span class="font-bold">Edad:</span> {{ persona.edad }}</h3>
+  </div>
+
+  } @case ('RESTA') {
+  <div class="flex-col">
+    <h3>
+      <span class="font-bold">La resta de los numeros(12, 20):</span>
+      {{ resta(12, 20) }}
+    </h3>
+    <h3>
+      <span class="font-bold">La multiplicacion de los numeros(8, 4):</span>
+      {{ producto(8, 4) }}
+    </h3>
+  </div>
+  } @case ('AREA') {
+
+  <h3>
+    <span class="font-bold">Dado el radius (5) el area del circulo es: </span>
+    {{ areaCirculo() }}
+  </h3>
+
+  } @case ('CONDICIONAL') {
+
+  <h1
+    [class]="
+      isLoggedIn ? 'text-green-700 font-bold' : 'text-red-700 font-bold '
+    "
+  >
+    {{ isLoggedIn ? "Bienvenido de nuevo!" : "Por favor, inicia sesion!" }}
+  </h1>
+
+  } @case ('FECHA') {
+
+  <h3><span class="font-bold">La fecha actual es: </span> {{ fecha() }}</h3>
+
+  } 
+
+  @case ('DATOS') {
+
+    
+      <div class="overflow-x-auto w-full max-h-96">
+        <table class="min-w-full bg-white border border-gray-300 shadow-md rounded-lg">
+          <thead>
+            <tr class="bg-gray-200 text-gray-700 uppercase text-sm leading-normal">
+              <th class="py-3 px-6 text-left">Nombre</th>
+              <th class="py-3 px-6 text-left">Apellido</th>
+              <th class="py-3 px-6 text-left">Cédula</th>
+              <th class="py-3 px-6 text-left">Dirección</th>
+            </tr>
+          </thead>
+          <tbody class="text-gray-600 text-sm font-light">
+            @for (dato of datos; track dato.id) {
+              <tr class="border-b border-gray-200 hover:bg-gray-100">
+                <td class="py-3 px-6 text-left whitespace-nowrap">{{ dato.nombre }}</td>
+                <td class="py-3 px-6 text-left">{{ dato.apellido }}</td>
+                <td class="py-3 px-6 text-left">{{ dato.cedula }}</td>
+                <td class="py-3 px-6 text-left">{{ dato.direccion }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
       </div>
       
-    }
-
-    @case ('RESTA') {
-      <div class="flex-col">
-        <h3> <span class="font-bold">La resta de los numeros(12, 20):</span> {{resta(12,20)}} </h3>
-        <h3> <span class="font-bold">La multiplicacion de los numeros(8, 4):</span> {{producto(8,4)}} </h3>
-      </div>     
-    }
-
-    @case ('AREA') {
-      
-      <h3> <span class="font-bold">Dado el radius (5) el area del circulo es: </span> {{areaCirculo()}} </h3>
-     
-    }
-
-    @case ('CONDICIONAL') {
-
-      <h1 [class]="  isLoggedIn? 'text-green-700 font-bold' : 'text-red-700 font-bold '">{{isLoggedIn? 'Bienvenido de nuevo!' : 'Por favor, inicia sesion!'}}</h1>
-
-    }
-
-    @case ('FECHA') {
-      
-      <h3> <span class="font-bold">La fecha actual es: </span> {{fecha()}} </h3>
-
-    }
-
-
-    @default {
-      <p>Por encima de 70</p>
-    }
-
   }
-
- 
   
+  
+  @default {
+  <p>Por encima de 70</p>
+  } }
 </section>
 
+} @else{
+<div class="flex w-full justify-center">
+  <p>No hay nada que mostrar, el usuario no esta logueado</p>
+</div>
+
+}
 
 

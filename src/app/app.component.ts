@@ -6,9 +6,8 @@ import { EjeciciosComponent } from './pages/ejecicios/ejecicios.component';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HeaderComponent, EjeciciosComponent],
+  imports: [EjeciciosComponent, RouterOutlet, HeaderComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
 })
 export class AppComponent {
   title = 'practica1-ITLA-Angular';

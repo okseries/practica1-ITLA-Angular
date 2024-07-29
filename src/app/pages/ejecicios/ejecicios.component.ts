@@ -1,18 +1,9 @@
 import { Component, signal } from '@angular/core';
 import { ButtonComponent } from '../../shared/button/button.component';
+import { datosPersonas } from '../../data/personas.data';
+import { DataI, Grade, Persona } from '../../interfaces/interfaces';
 
-type Grade =
-  'MENSAJE' |
-  'NOMBRE' |
-  'RESTA' |
-  'AREA' |
-  'CONDICIONAL' |
-  'FECHA';
 
-interface Persona {
-  nombre: string;
-  edad: number;
-}
 @Component({
   selector: 'app-ejecicios',
   standalone: true,
@@ -23,6 +14,11 @@ interface Persona {
 export class EjeciciosComponent {
 
   public grade = signal<Grade>('MENSAJE');
+
+
+  // cambio(){
+  //   this.grade.set('FECHA')
+  // }
 
   persona: Persona = {
     nombre: 'Alen Ross',
@@ -55,7 +51,16 @@ export class EjeciciosComponent {
   }
 
 
-  public isLoggedIn: boolean = true;
+  public isLoggedIn: boolean = false;
 
+  public login(){
+
+    this.isLoggedIn = !this.isLoggedIn;
+
+  }
+
+   datos: DataI[] = datosPersonas;
+
+  
 
 }
