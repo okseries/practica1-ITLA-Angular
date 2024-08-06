@@ -1,19 +1,26 @@
-import { Component, signal } from '@angular/core';
-import { ButtonComponent } from '../../shared/button/button.component';
+import { Component, inject, signal } from '@angular/core';
+import { ButtonComponent } from '../../shared/components/button/button.component';
 import { datosPersonas } from '../../data/personas.data';
 import { DataI, Grade, Persona } from '../../interfaces/interfaces';
+import { EjerciciosService } from './ejercicios.service';
+import { DropdownComponent } from '../../shared/components/dropdown/dropdown.component';
+import { RouterOutlet } from '@angular/router';
 
 
 @Component({
   selector: 'app-ejecicios',
   standalone: true,
-  imports: [ButtonComponent],
+  imports: [ButtonComponent, DropdownComponent, RouterOutlet],
   templateUrl: './ejecicios.component.html',
   styleUrl: './ejecicios.component.css'
 })
 export class EjeciciosComponent {
 
+
   public grade = signal<Grade>('MENSAJE');
+
+  public ejerciciosService = inject(EjerciciosService);
+
 
 
   // cambio(){

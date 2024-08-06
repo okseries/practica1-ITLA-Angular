@@ -1,17 +1,5 @@
-<div class=" flex w-full justify-center">
-  <button
-  (click)="login()"
-  [class]="
-  isLoggedIn
-      ? 'justify-self-end mb-4 rounded text-center px-2 py-2 text-white bg-orange-600  hover:bg-orange-700'
-      : 'justify-self-end mb-4 rounded text-center px-2 py-2 text-white bg-blue-900  hover:bg-blue-950, '
-  "
->
-  {{ isLoggedIn ? "Cerrar sesion" : "Iniciar sesion" }}
-</button>
-</div>
 
-@if (isLoggedIn) {
+@if (ejerciciosService.isLoggedIn) {
 
 <div
   class="flex rounded overflow-hidden shadow-lg w-full space-x-2 items-center px-4 py-4 justify-evenly"
@@ -23,6 +11,7 @@
   <app-button text="Condicional" (click)="grade.set('CONDICIONAL')" />
   <app-button text="Fecha" (click)="grade.set('FECHA')" />
   <app-button text="Ver datos" (click)="grade.set('DATOS')" />
+
 </div>
 
 <section class="flex shadow-inner w-full items-center px-4 py-4">
@@ -98,13 +87,14 @@
   
   
   @default {
-  <p>Por encima de 70</p>
+  <p></p>
   } }
 </section>
 
 } @else{
 <div class="flex w-full justify-center">
   <p>No hay nada que mostrar, el usuario no esta logueado</p>
+
 </div>
 
 }
